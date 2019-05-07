@@ -39,6 +39,7 @@
 body {
     font-family: "OpenSans", sans-serif;
     background: #31333d;
+    min-height: 100vh;
 }
 
 h1 {
@@ -104,4 +105,30 @@ header h1 {
     background: -webkit-linear-gradient(top, rgba(49,51,61,0) 0%,rgba(49,51,61,1) 100%);
     background: linear-gradient(to bottom, rgba(49,51,61,0) 0%,rgba(49,51,61,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0031333d', endColorstr='#31333d',GradientType=0 );
+}
+
+
+/* main */
+main {
+    display: block;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 45vh;
+}
+
+main a{
+    padding: 5px 20px;
+    border: 1px solid #31a45c;
+    margin: 10px;
+    color: #31a45c;
+    text-decoration: none;
+    transition: ease .5s background;
+}
+
+main a:hover {
+    background: #31a45c;
+
 }
