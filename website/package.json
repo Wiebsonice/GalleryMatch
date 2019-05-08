@@ -8,7 +8,7 @@
     "start": "nodemon js/main.js"
   },
   "author": "Wiebe kremer",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "camelcase": "^5.3.1"
 },
