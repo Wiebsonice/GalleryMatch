@@ -21,4 +21,4 @@ npm run start
 ```
 
 # License
-["MIT License"](https://github.com/Wiebsonice/GalleryMatch/blob/master/license)
+[MIT License](https://github.com/Wiebsonice/GalleryMatch/blob/master/license)
