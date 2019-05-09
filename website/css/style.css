@@ -40,6 +40,13 @@ body {
     font-family: "OpenSans", sans-serif;
     background: #31333d;
     min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+body.bg-light {
+    background-color: #f3f1f4;
 }
 
 h1 {
@@ -48,13 +55,39 @@ h1 {
     font-size: 3em;
 }
 
+a {
+    text-decoration: none;
+    color: #31333d;
+
+}
+
 
 
 /* Nav */
-nav {
+nav.default {
     width: 100%;
     position: absolute;
     z-index: 10;
+}
+nav.detail {
+    width: 100%;
+    background: green;
+    z-index: 10;
+    position: fixed;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px 0;
+    font-weight: 100;
+    color: #31333d;
+    height: 38px;
+    top: 0;
+}
+
+nav.detail div.back {
+    position: absolute;
+    font-size: 25px;
+    width: 50px;
+    margin-top: -5px;
 }
 
 .logo {
@@ -110,16 +143,19 @@ header h1 {
 
 /* main */
 main {
+    margin-top: 30px;
     display: block;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 45vh;
+    height: 100%;
 }
 
-main a{
+
+
+main a.sub-cta{
     padding: 5px 20px;
     border: 1px solid #31a45c;
     margin: 10px;
@@ -128,7 +164,122 @@ main a{
     transition: ease .5s background;
 }
 
-main a:hover {
+main a.main-cta {
+    background: #31a45c;
+    color:#31333d;
+}
+
+main a.sub-cta:hover {
     background: #31a45c;
 
+}
+
+section.personal-info {
+    height: 70%;
+    width: 100%;
+    color: #f3f1f4;
+
+}
+
+section.personal-info ul {
+    border-bottom: 1px solid #f3f1f4;
+    padding-bottom: 30px;
+}
+
+section.personal-info ul li{
+    list-style: none;
+    margin: 0;
+    padding: 0 40px;
+    font-size: 14px;
+}
+
+section.art-gallery {
+    height: 100%;
+    width: 100%;
+    color: #f3f1f4;
+    position: relative;
+    border-bottom: 1px solid #f3f1f4;
+}
+section.art-gallery article {
+    overflow-x: scroll;
+    width: 100%;
+}
+
+section.art-gallery header {
+    position: absolute;
+    max-width: calc( 100vw - 30px);
+    left: 15px;
+    top: 15px;
+}
+
+section.art-gallery h2 {
+    font-weight: 100;
+    font-size: 16px;
+    display: block;
+}
+section.art-gallery ul {
+    width: 175%;
+    padding-top: 50px;
+    padding-bottom: 40px;
+}
+
+section.art-gallery ul li{
+    border: 1px solid white;
+    opacity: .5;
+    display: inline-block;
+    width: 110px;
+    height: 140px;
+    margin: 0 15px;
+    position:relative;
+}
+section.art-gallery ul li a{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+}
+
+section.art-gallery footer {
+    position: absolute;
+    left: 15px;
+    bottom: 15px;
+    font-size: 12px;
+}
+
+header.search {
+    position: fixed;
+    top: 38px;
+    background: lightgrey;
+    height: 30px;
+    padding: 2px 0;
+    z-index: 10;
+}
+header.search form {
+    display: inline-block;
+    padding-left: 20%;
+}
+header.search a {
+    display: inline-block;
+    padding-left: 20px;
+}
+
+section.art-galleries {
+    margin-top: 40px;
+}
+
+section.art-galleries ul li{
+    border: 1px solid white;
+    opacity: .5;
+    display: inline-block;
+    background: grey;
+    width: 110px;
+    height: 140px;
+    margin: 10px 10px;
+    position:relative;
 }
