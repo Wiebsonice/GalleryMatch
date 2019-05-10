@@ -165,6 +165,8 @@ main a.sub-cta{
 }
 
 main a.main-cta {
+    padding: 5px 20px;
+    border: 1px solid #31a45c;
     background: #31a45c;
     color:#31333d;
 }
