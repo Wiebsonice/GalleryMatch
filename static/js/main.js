@@ -1,3 +1,1 @@
-const camelCase = require('camelcase');
-
-camelCase('Dit-is-een-test');
+console.log("gelinkt")
