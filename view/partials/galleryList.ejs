@@ -1,0 +1,15 @@
+<section class="art-galleries">
+    <article class="">
+        <ul>
+            <% expos.forEach((expo) => {%>
+                <li>
+                    <div class="location-bg" style="background-image: url(<%= expo.image %>)"></div>
+                    <header>
+                        <p class="title"><%= expo.title %></p>
+                        <p class="Location"><%= expo.location %></p>
+                    </header>
+                </li>
+            <% }) %>
+        </ul>
+    </article>
+</section>

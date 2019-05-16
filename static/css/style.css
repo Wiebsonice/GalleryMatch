@@ -146,6 +146,13 @@ main {
     margin-top: 30px;
     display: block;
     position: relative;
+    height: 100%;
+}
+
+main.home {
+    margin-top: 30px;
+    display: block;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -177,7 +184,6 @@ main a.sub-cta:hover {
 }
 
 section.personal-info {
-    height: 70%;
     width: 100%;
     color: #f3f1f4;
 
@@ -196,7 +202,6 @@ section.personal-info ul li{
 }
 
 section.art-gallery {
-    height: 100%;
     width: 100%;
     color: #f3f1f4;
     position: relative;
@@ -272,16 +277,65 @@ header.search a {
 }
 
 section.art-galleries {
-    margin-top: 40px;
+    margin-top: 100px;
+    width: 100%;
+}
+
+section.art-galleries ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+
 }
 
 section.art-galleries ul li{
     border: 1px solid white;
-    opacity: .5;
-    display: inline-block;
+    opacity: 1;
     background: grey;
-    width: 110px;
+    width: 31%;
+    margin: 1% 0;
     height: 140px;
-    margin: 10px 10px;
     position:relative;
+}
+
+section.art-galleries ul li .location-bg{
+    background: red;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+section.art-galleries ul li header {
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    align-content: flex-end;
+    flex-wrap: wrap;
+    height: 100%;
+    bottom: 0;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    background: -moz-linear-gradient(top, rgba(49,51,61,0) 0%, rgba(49,51,61,1) 100%);
+    background: -webkit-linear-gradient(top, rgba(49,51,61,0) 0%,rgba(49,51,61,1) 100%);
+    background: linear-gradient(to bottom, rgba(49,51,61,0) 0%,rgba(49,51,61,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0031333d', endColorstr='#31333d',GradientType=0 );
+}
+
+section.art-galleries ul li header p.title {
+    color: white;
+    font-family: "ClickerScript";
+    font-size: 25px;
+}
+
+section.art-galleries ul li header p.location {
+    font-size: 12px;
+    color: white;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
 }
