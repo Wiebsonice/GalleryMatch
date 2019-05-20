@@ -1,0 +1,21 @@
+<html lang="nl">
+<head>
+    <% include partials/head %>
+</head>
+<body>
+    <nav class="default">
+        <div class="logo">
+            <a href="../index.html"><img src="../assets/logo.png" alt="site logo"></a>
+        </div>
+    </nav>
+    <header>
+        <img src="<%= expos[index].image %>" alt="" class="header-bg">
+        <div class="gradient-mask"></div>
+        <h1>Martin de Jongh</h1>
+    </header>
+    <main>
+        <p class="title"><%= expos[index].title %></p>
+    </main>
+    <script src="/js/main.js"></script>
+</body>
+</html>

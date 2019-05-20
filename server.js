@@ -3,13 +3,6 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
-// allow cross orgin resource serving
-app.use(cors({origin: '*'}));
-
-app.set('view engine', 'ejs');
-app.set('views', 'view')
-app.use(express.static('static'))
-
 const expos = [
 {
     id: 1,
@@ -79,17 +72,33 @@ const expos = [
 }
 ]
 
+// allow cross orgin resource serving
+app.use(cors({origin: '*'}));
 
-// Normal routes
-app.get('/', function(req, res) {
+app.set('view engine', 'ejs');
+app.set('views', 'view')
+app.use(express.static('static'))
+
+app.get('/', homePage);
+app.get('/account', accountPage);
+app.get('/art-galleries', artGalleryPage)
+app.get('/:id', galleryPage)
+
+
+function homePage(req, res){
     res.render('index', {title: 'Home' });
-});
-app.get('/account', function(req, res) {
+}
+function accountPage(req, res){
     res.render('account', {title: 'Account' });
-});
-app.get('/art-galleries', function(req, res) {
+}
+function artGalleryPage(req, res){
     res.render('artGalleries', {title: 'Art Galleries', expos: expos });
-});
+}
+function galleryPage(req, res){
+    var id = req.params.id;
+    res.render('galleryDetail', {title: id, expos:expos, index: id})
+}
+
 
 // 404 status route set.
 app.use(function(req, res, next){

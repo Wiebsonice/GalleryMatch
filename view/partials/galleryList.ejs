@@ -1,15 +1,17 @@
 <section class="art-galleries">
     <article class="">
         <ul>
-            <% expos.forEach((expo) => {%>
+            <% for (var index = 0; index < expos.length; index++){%>
                 <li>
-                    <div class="location-bg" style="background-image: url(<%= expo.image %>)"></div>
+                    <div class="location-bg" style="background-image: url(<%= expos[index].image %>)"></div>
+                    <a href="/<%= expos[index].id %>">
                     <header>
-                        <p class="title"><%= expo.title %></p>
-                        <p class="Location"><%= expo.location %></p>
+                        <p class="title"><%= expos[index].title %></p>
+                        <p class="Location"><%= expos[index].location %></p>
                     </header>
+                    </a>
                 </li>
-            <% }) %>
+            <% } %>
         </ul>
     </article>
 </section>
