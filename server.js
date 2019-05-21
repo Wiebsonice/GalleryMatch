@@ -1,7 +1,11 @@
 const express = require('express');
 const cors = require('cors');
+const slug = require('slug');
+const bodyParser = require('body-parser');
+const multer = require('multer');
 const app = express();
 const port = 3000;
+const upload = multer({dest: 'static/upload/'})
 
 const expos = [
 {
@@ -71,18 +75,31 @@ const expos = [
     image: "/assets/header.jpg"
 }
 ]
+const users = [
+{
+    name: "Peter",
+    email: "test@info.nl",
+    password: "Yeet",
+    cover: ""
+}
+]
 
 // allow cross orgin resource serving
 app.use(cors({origin: '*'}));
 
 app.set('view engine', 'ejs');
-app.set('views', 'view')
-app.use(express.static('static'))
+app.set('views', 'view');
+app.use(express.static('static'));
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', homePage);
 app.get('/account', accountPage);
-app.get('/art-galleries', artGalleryPage)
-app.get('/:id', galleryPage)
+app.get('/art-galleries', artGalleryPage);
+app.get('/register', registerPage);
+app.get('/:id', galleryPage);
+app.get('/account/:name', accountPage);
+
+app.post('/register', upload.single('cover'), sendRegister)
 
 
 function homePage(req, res){
@@ -94,9 +111,29 @@ function accountPage(req, res){
 function artGalleryPage(req, res){
     res.render('artGalleries', {title: 'Art Galleries', expos: expos });
 }
+function registerPage(req, res){
+    res.render('formPage.ejs', {title: 'Registreren' });
+}
 function galleryPage(req, res){
     var id = req.params.id;
     res.render('galleryDetail', {title: id, expos:expos, index: id})
+}
+function accountPage(req, res){
+    var name = req.params.id;
+    res.render('account', {title: name, users:users})
+}
+
+function sendRegister(req, res) {
+    var id = slug(req.body.name).toLowerCase()
+    users.push({
+        name: id,
+        email: req.body.email,
+        password: req.body.password,
+        cover: req.file ? req.file.filename : null
+    })
+    console.log(users)
+
+    res.redirect('/account/' + id)
 }
 
 

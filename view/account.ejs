@@ -5,11 +5,17 @@
 <body>
     <nav class="default">
         <div class="logo">
-            <a href="../index.html"><img src="../assets/logo.png" alt="site logo"></a>
+            <a href="../"><img src="../assets/logo.png" alt="site logo"></a>
         </div>
     </nav>
     <header>
-        <img src="../assets/profile.jpg" alt="" class="header-bg">
+        <% if (users.cover) { %>
+            <img alt=""src="/upload/<%= users.cover %>" class="header-bg">
+        <% } else { %>
+            <img src="../assets/profile.jpg" alt="" class="header-bg">
+        <% }%>
+
+
         <div class="gradient-mask"></div>
         <h1>Martin de Jongh</h1>
     </header>
@@ -59,6 +65,8 @@
             </article>
         </section>
     </main>
+
+
     <script src="http://localhost:3000/js/main.js"></script>
 </body>
 </html>
