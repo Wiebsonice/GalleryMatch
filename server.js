@@ -3,9 +3,21 @@ const cors = require('cors');
 const slug = require('slug');
 const bodyParser = require('body-parser');
 const multer = require('multer');
+const mongo = require('mongodb');
+
 const app = express();
 const port = 3000;
 const upload = multer({dest: 'static/upload/'})
+
+require('dotenv').config()
+
+var db = null;
+var url = 'mongodb://' + process.env.DB_HOST + ':' + process.env.DB_PORT;
+
+mongo.MongoClient.connect(url, function (err, client) {
+  if (err) throw err
+  db = client.db(process.env.DB_NAME)
+})
 
 const expos = [
 {
@@ -103,7 +115,17 @@ app.post('/register', upload.single('cover'), sendRegister)
 
 
 function homePage(req, res){
-    res.render('index', {title: 'Home' });
+    // res.render('index', {title: 'Home' });
+
+    db.collection('account').find().toArray(done)
+
+    function done(err, data) {
+        if (err) {
+            next(err)
+        } else {
+            res.render('index', {data:data})
+        }
+    }
 }
 function accountPage(req, res){
     res.render('account', {title: 'Account' });
@@ -123,17 +145,31 @@ function accountPage(req, res){
     res.render('account', {title: name, users:users})
 }
 
-function sendRegister(req, res) {
-    var id = slug(req.body.name).toLowerCase()
-    users.push({
-        name: id,
+function sendRegister(req, res, next) {
+    // var id = slug(req.body.name).toLowerCase()
+    // users.push({
+    //     name: id,
+    //     email: req.body.email,
+    //     password: req.body.password,
+    //     cover: req.file ? req.file.filename : null
+    // })
+    //
+    // res.redirect('/account/' + id)
+
+    db.collection('account').insertOne({
+        name: req.body.name,
         email: req.body.email,
         password: req.body.password,
         cover: req.file ? req.file.filename : null
-    })
-    console.log(users)
+    }, done)
 
-    res.redirect('/account/' + id)
+    function done(err, data) {
+        if (err) {
+            next(err)
+        } else {
+            res.redirect('/account/' + data)
+        }
+    }
 }
 
 
