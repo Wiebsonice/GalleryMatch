@@ -173,6 +173,22 @@ function sendRegister(req, res, next) {
 }
 
 
+// harvart art api
+var rest = require("restler");
+
+// Find all of the objects with the word "dog" in the title and return only a few fields per record
+rest.get("https://api.harvardartmuseums.org/object", {
+    query: {
+        apikey: "0649ad30-7cd9-11e9-bbd3-cdc438639350",
+        title: "car",
+        fields: "objectnumber,title,dated,image",
+    }
+}).on("complete", function(data, response) {
+    console.log(data);
+});
+
+
+
 // 404 status route set.
 app.use(function(req, res, next){
     res.status(404).render('404', {title: "404 page not found"});
