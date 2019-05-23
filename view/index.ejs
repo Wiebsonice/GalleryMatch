@@ -18,5 +18,18 @@
         <a class="sub-cta" href="/register">Log-in</a>
         <a class="main-cta" href="/account">Profiel pagina</a>
     </main>
+
+    <% for (var index = 0; index < data.length; index++){%>
+        <li>
+            <div class="location-bg" style="background-image: url(<%= data[index].cover %>)"></div>
+            <a href="/<%= data[index].name %>">
+            <header>
+                <p class="title"><%= data[index].name %></p>
+                <p class="Location"><%= data[index].email %></p>
+            </header>
+            </a>
+        </li>
+    <% } %>
+
     <script src="http://localhost:3000/js/main.js"></script>
 </body>

@@ -123,7 +123,8 @@ function homePage(req, res){
         if (err) {
             next(err)
         } else {
-            res.render('index', {data:data})
+            res.render('index', {data:data, title: 'Home'})
+            console.log(data)
         }
     }
 }
@@ -146,15 +147,8 @@ function accountPage(req, res){
 }
 
 function sendRegister(req, res, next) {
-    // var id = slug(req.body.name).toLowerCase()
-    // users.push({
-    //     name: id,
-    //     email: req.body.email,
-    //     password: req.body.password,
-    //     cover: req.file ? req.file.filename : null
-    // })
-    //
-    // res.redirect('/account/' + id)
+    var naam = slug(req.body.name).toLowerCase()
+    
 
     db.collection('account').insertOne({
         name: req.body.name,
@@ -167,25 +161,25 @@ function sendRegister(req, res, next) {
         if (err) {
             next(err)
         } else {
-            res.redirect('/account/' + data)
+            // res.redirect('/account/' + data)
+            res.redirect('/account/' + naam)
         }
     }
 }
 
 
 // harvart art api
-var rest = require("restler");
-
-// Find all of the objects with the word "dog" in the title and return only a few fields per record
-rest.get("https://api.harvardartmuseums.org/object", {
-    query: {
-        apikey: "0649ad30-7cd9-11e9-bbd3-cdc438639350",
-        title: "car",
-        fields: "objectnumber,title,dated,image",
-    }
-}).on("complete", function(data, response) {
-    console.log(data);
-});
+// var rest = require("restler");
+//
+// rest.get("https://api.harvardartmuseums.org/object", {
+//     query: {
+//         apikey: "0649ad30-7cd9-11e9-bbd3-cdc438639350",
+//         title: "car",
+//         fields: "objectnumber,title,dated,image",
+//     }
+// }).on("complete", function(data, response) {
+//     console.log(data);
+// });
 
 
 
