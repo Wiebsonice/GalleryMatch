@@ -1,3 +1,5 @@
+![GalleryMatch logo](https://github.com/Wiebsonice/GalleryMatch/blob/master/wiki-assets/logo-horizontal.png)
+
 # GalleryMatch
 Datingsite for 40+ people who love to visit musea, and have a passion for art.
 
