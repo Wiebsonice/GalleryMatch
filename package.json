@@ -17,6 +17,7 @@
     "dotenv": "^8.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "express-session": "^1.16.1",
     "mongodb": "^3.2.5",
     "multer": "^1.4.1",
     "restler": "^3.4.0",

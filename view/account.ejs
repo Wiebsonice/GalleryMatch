@@ -9,15 +9,19 @@
         </div>
     </nav>
     <header>
-        <% if (users.cover) { %>
-            <img alt=""src="/upload/<%= users.cover %>" class="header-bg">
+        <% if (data) { %>
+            <img alt=""src="/upload/<%= data.cover %>" class="header-bg">
         <% } else { %>
             <img src="../assets/profile.jpg" alt="" class="header-bg">
         <% }%>
 
 
         <div class="gradient-mask"></div>
+        <% if (data) { %>
+        <h1><%= data.name %></h1>
+        <% } else { %>
         <h1>Martin de Jongh</h1>
+        <% }%>
     </header>
     <main>
         <section class="personal-info">

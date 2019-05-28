@@ -9,12 +9,12 @@
         </div>
     </nav>
     <header>
-        <img src="<%= expos[index - 1].image %>" alt="" class="header-bg">
+        <img src="../assets/expo-covers/<%= data.cover %>" alt="" class="header-bg">
         <div class="gradient-mask"></div>
-        <h1><%= expos[index - 1 ].title %></h1>
+        <h1><%= data.artist %></h1>
     </header>
     <main>
-        <p class="title"><%= expos[index - 1].location %></p>
+        <p class="title"><%= data.location %></p>
     </main>
     <script src="/js/main.js"></script>
 </body>

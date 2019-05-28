@@ -1,13 +1,13 @@
 <section class="art-galleries">
     <article class="">
         <ul>
-            <% for (var index = 0; index < expos.length; index++){%>
+            <% for (var index = 0; index < data.length; index++){%>
                 <li>
-                    <div class="location-bg" style="background-image: url(<%= expos[index].image %>)"></div>
-                    <a href="/<%= expos[index].id %>">
+                    <div class="location-bg" style="background-image: url(assets/expo-covers/<%= data[index].cover %>)"></div>
+                    <a href="art-galleries/<%= data[index]._id %>">
                     <header>
-                        <p class="title"><%= expos[index].title %></p>
-                        <p class="Location"><%= expos[index].location %></p>
+                        <p class="title"><%= data[index].artist %></p>
+                        <p class="Location"><%= data[index].location %></p>
                     </header>
                     </a>
                 </li>

@@ -4,6 +4,7 @@ const slug = require('slug');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const mongo = require('mongodb');
+const session = require('express-session');
 
 const app = express();
 const port = 3000;
@@ -96,8 +97,14 @@ const users = [
 }
 ]
 
-// allow cross orgin resource serving
+// allow cross orgin resource serving from: https://flaviocopes.com/express-cors/
 app.use(cors({origin: '*'}));
+
+app.use(session({
+    resave: false,
+    saveUninitialized: true,
+    secret: process.env.SESSION_SECRET
+}))
 
 app.set('view engine', 'ejs');
 app.set('views', 'view');
@@ -105,11 +112,11 @@ app.use(express.static('static'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', homePage);
-app.get('/account', accountPage);
+// app.get('/account', accountPage);
 app.get('/art-galleries', artGalleryPage);
 app.get('/register', registerPage);
-app.get('/:id', galleryPage);
-app.get('/account/:name', accountPage);
+app.get('/art-galleries/:id', galleryPage);
+app.get('/account/:id', accountPage);
 
 app.post('/register', upload.single('cover'), sendRegister)
 
@@ -123,46 +130,72 @@ function homePage(req, res){
         if (err) {
             next(err)
         } else {
-            res.render('index', {data:data, title: 'Home'})
-            console.log(data)
+            res.render('index', {data: data, title: 'Home'})
         }
     }
 }
 function accountPage(req, res){
-    res.render('account', {title: 'Account' });
+    var id = req.params.id
+    db.collection('account').findOne({
+        _id: mongo.ObjectID(id)
+    }, done)
+
+    function done(err, data) {
+        if (err) {
+          next(err)
+        } else {
+          res.render('account', {title: 'Je Account pagina', data: data})
+        }
+    }
 }
 function artGalleryPage(req, res){
-    res.render('artGalleries', {title: 'Art Galleries', expos: expos });
+    db.collection('ArtExpositions').find().toArray(done)
+
+    function done(err, data) {
+        if (err) {
+            next(err)
+        } else {
+            res.render('artGalleries', {title: 'Art Galleries', data: data});
+            console.log(data)
+        }
+    }
+
 }
 function registerPage(req, res){
     res.render('formPage.ejs', {title: 'Registreren' });
 }
 function galleryPage(req, res){
-    var id = req.params.id;
-    res.render('galleryDetail', {title: id, expos:expos, index: id})
-}
-function accountPage(req, res){
-    var name = req.params.id;
-    res.render('account', {title: name, users:users})
+    var id = req.params.id
+    db.collection('ArtExpositions').findOne({
+        _id: mongo.ObjectID(id)
+    }, done)
+
+    function done(err, data) {
+        if (err) {
+          next(err)
+        } else {
+          res.render('galleryDetail', {title: data.name, data: data})
+          console.log(data)
+        }
+    }
 }
 
 function sendRegister(req, res, next) {
     var naam = slug(req.body.name).toLowerCase()
-    
-
     db.collection('account').insertOne({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        cover: req.file ? req.file.filename : null
+        cover: req.file ? req.file.filename : null,
+        expoWishlist:null
     }, done)
 
     function done(err, data) {
         if (err) {
             next(err)
         } else {
-            // res.redirect('/account/' + data)
-            res.redirect('/account/' + naam)
+            // req.session.user = {name: username}
+            res.redirect('/account/' + data.insertedId)
         }
     }
 }
