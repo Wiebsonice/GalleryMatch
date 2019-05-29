@@ -117,6 +117,7 @@ function sendRegister(req, res, next) {
         if (err) {
             next(err)
         } else {
+            // sessions help van danny
             req.session.user = {name: data.ops[0]._id}
             res.redirect('/account/' + data.insertedId)
         }
