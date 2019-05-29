@@ -20,82 +20,6 @@ mongo.MongoClient.connect(url, function (err, client) {
   db = client.db(process.env.DB_NAME)
 })
 
-const expos = [
-{
-    id: 1,
-    title: "Banksy",
-    location: "Stedelijk Museum Amsterdam",
-    image: "/assets/profile.jpg"
-},
-{
-    id: 2,
-    title: "Van Gogh",
-    location: "Van Gogh",
-    image: "/assets/header.jpg"
-},
-{
-    id: 3,
-    title: "D. Hockney",
-    location: "Rijksmuseum",
-    image: "/assets/header2.jpg"
-},
-{
-    id: 4,
-    title: "Banksy 2",
-    location: "Stedelijk Museum Amsterdam",
-    image: "/assets/profile.jpg"
-},
-{
-    id: 5,
-    title: "Van Gogh 2",
-    location: "Van Gogh",
-    image: "/assets/header.jpg"
-},
-{
-    id: 6,
-    title: "D. Hockney 2",
-    location: "Rijksmuseum",
-    image: "/assets/header2.jpg"
-},
-{
-    id: 7,
-    title: "Banksy 3",
-    location: "Stedelijk Museum Amsterdam",
-    image: "/assets/profile.jpg"
-},
-{
-    id: 8,
-    title: "Van Gogh 3",
-    location: "Van Gogh",
-    image: "/assets/header.jpg"
-},
-{
-    id: 9,
-    title: "D. Hockney 3",
-    location: "Rijksmuseum",
-    image: "/assets/header2.jpg"
-},
-{
-    id: 10,
-    title: "Banksy 4",
-    location: "Stedelijk Museum Amsterdam",
-    image: "/assets/profile.jpg"
-},
-{
-    id: 11,
-    title: "Van Gogh 4",
-    location: "Van Gogh",
-    image: "/assets/header.jpg"
-}
-]
-const users = [
-{
-    name: "Peter",
-    email: "test@info.nl",
-    password: "Yeet",
-    cover: ""
-}
-]
 
 // allow cross orgin resource serving from: https://flaviocopes.com/express-cors/
 app.use(cors({origin: '*'}));
@@ -112,7 +36,7 @@ app.use(express.static('static'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', homePage);
-// app.get('/account', accountPage);
+app.get('/account', accountPage);
 app.get('/art-galleries', artGalleryPage);
 app.get('/register', registerPage);
 app.get('/art-galleries/:id', galleryPage);
@@ -130,7 +54,7 @@ function homePage(req, res){
         if (err) {
             next(err)
         } else {
-            res.render('index', {data: data, title: 'Home'})
+            res.render('index', {data: data, title: 'Home', user: req.session.user})
         }
     }
 }
@@ -175,7 +99,6 @@ function galleryPage(req, res){
           next(err)
         } else {
           res.render('galleryDetail', {title: data.name, data: data})
-          console.log(data)
         }
     }
 }
@@ -187,14 +110,14 @@ function sendRegister(req, res, next) {
         email: req.body.email,
         password: req.body.password,
         cover: req.file ? req.file.filename : null,
-        expoWishlist:null
+        expoWishlist:""
     }, done)
 
     function done(err, data) {
         if (err) {
             next(err)
         } else {
-            // req.session.user = {name: username}
+            req.session.user = {name: data.ops[0]._id}
             res.redirect('/account/' + data.insertedId)
         }
     }
