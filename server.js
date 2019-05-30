@@ -42,7 +42,8 @@ app.get('/register', registerPage);
 app.get('/art-galleries/:id', galleryPage);
 app.get('/account/:id', accountPage);
 
-app.post('/register', upload.single('cover'), sendRegister)
+app.post('/register', upload.single('cover'), sendRegister);
+app.post('/art-galleries/:id', addToWishlist);
 
 
 function homePage(req, res){
@@ -80,7 +81,6 @@ function artGalleryPage(req, res){
             next(err)
         } else {
             res.render('artGalleries', {title: 'Art Galleries', data: data});
-            console.log(data)
         }
     }
 
@@ -98,7 +98,40 @@ function galleryPage(req, res){
         if (err) {
           next(err)
         } else {
-          res.render('galleryDetail', {title: data.name, data: data})
+          res.render('galleryDetail', {title: data.name, data: data,user: req.session.user})
+        }
+    }
+}
+
+function addToWishlist(req, res, next) {
+    var expoID = req.params.id;
+    var sessionID = req.session.user;
+    var accountID = sessionID.name;
+    console.log(accountID)
+    console.log(expoID)
+
+    // db.collection('account').updateOne(
+    //     { _id : accountID },
+    //     { $push : { expoWishlist : expoID } }
+    // , done)
+
+    // Hulp van Rijk.
+    var ObjectID = require('mongodb').ObjectID;
+
+    db.collection('account').updateOne(
+      { _id: ObjectID(accountID) },
+      {
+        $push: {
+          expoWishlist: expoID
+        }
+      }
+    , done);
+
+    function done(err, data) {
+        if (err) {
+            next(err)
+        } else {
+            res.redirect('/account/' + accountID)
         }
     }
 }
@@ -110,7 +143,7 @@ function sendRegister(req, res, next) {
         email: req.body.email,
         password: req.body.password,
         cover: req.file ? req.file.filename : null,
-        expoWishlist:""
+        expoWishlist:[]
     }, done)
 
     function done(err, data) {

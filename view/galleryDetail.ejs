@@ -15,6 +15,16 @@
     </header>
     <main>
         <p class="title"><%= data.location %></p>
+        <% if (user) { %>
+        <form class="" method="post">
+            <fieldset>
+                <p>
+                    <button type="submit" name="button">Ik wil hier heen</button>
+                </p>
+            </fieldset>
+        </form>
+        <% } %>
+
     </main>
     <script src="/js/main.js"></script>
 </body>
