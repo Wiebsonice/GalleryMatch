@@ -11,10 +11,15 @@
     <header>
         <img src="../assets/header2.jpg" alt="" class="header-bg">
         <div class="gradient-mask"></div>
-        <h1>Ree</h1>
+        <h1><%= title %></h1>
     </header>
     <main>
-        <% include partials/registrationForm %>
+        <% if (title == "log-in" ){ %>
+            <% include partials/loginForm %>
+        <% } else { %>
+            <% include partials/registrationForm %>
+        <% } %>
+
     </main>
     <script src="/js/main.js"></script>
 </body>

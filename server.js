@@ -39,10 +39,13 @@ app.get('/', homePage);
 app.get('/account', accountPage);
 app.get('/art-galleries', artGalleryPage);
 app.get('/register', registerPage);
+app.get('/login', loginPage);
+app.get('/log-out', logout);
 app.get('/art-galleries/:id', galleryPage);
 app.get('/account/:id', accountPage);
 
 app.post('/register', upload.single('cover'), sendRegister);
+app.post('/login', sendLogin);
 app.post('/art-galleries/:id', addToWishlist);
 
 
@@ -88,6 +91,18 @@ function artGalleryPage(req, res){
 function registerPage(req, res){
     res.render('formPage.ejs', {title: 'Registreren' });
 }
+function loginPage(req, res){
+    res.render('formPage.ejs', {title: 'log-in' });
+}
+function logout(req, res, next) {
+    req.session.destroy(function(err) {
+        if (err) {
+            next(err)
+        } else {
+            res.redirect('/')
+        }
+    })
+}
 function galleryPage(req, res){
     var id = req.params.id
     db.collection('ArtExpositions').findOne({
@@ -107,13 +122,6 @@ function addToWishlist(req, res, next) {
     var expoID = req.params.id;
     var sessionID = req.session.user;
     var accountID = sessionID.name;
-    console.log(accountID)
-    console.log(expoID)
-
-    // db.collection('account').updateOne(
-    //     { _id : accountID },
-    //     { $push : { expoWishlist : expoID } }
-    // , done)
 
     // Hulp van Rijk.
     var ObjectID = require('mongodb').ObjectID;
@@ -132,6 +140,30 @@ function addToWishlist(req, res, next) {
             next(err)
         } else {
             res.redirect('/account/' + accountID)
+        }
+    }
+}
+
+function sendLogin(req, res, next){
+    var userEmail = req.body.email
+    var userPassword = req.body.password
+    db.collection('account').findOne({
+        email: req.body.email
+    }, done)
+
+
+    function done(err, data) {
+        if (err) {
+          next(err)
+        } if (!data){
+            console.log("No user found with this email")
+        } else {
+            if (userPassword === data.password) {
+                req.session.user = {name: data._id}
+                res.redirect('/')
+            } else {
+                res.status(401).send('Wachtwoord incorrect')
+            }
         }
     }
 }
