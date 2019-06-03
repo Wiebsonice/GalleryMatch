@@ -53,6 +53,7 @@ h1 {
     font-family: "ClickerScript";
     color: white;
     font-size: 3em;
+    text-transform: capitalize;
 }
 
 a {
