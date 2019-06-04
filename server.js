@@ -16,8 +16,11 @@ var db = null;
 var url = 'mongodb://' + process.env.DB_HOST + ':' + process.env.DB_PORT;
 
 mongo.MongoClient.connect(url, function (err, client) {
-  if (err) throw err
-  db = client.db(process.env.DB_NAME)
+  if (err) {
+      next(err)
+  } else {
+     db = client.db(process.env.DB_NAME)
+  }
 })
 
 
