@@ -40,11 +40,12 @@
                     <h2>Waar wil ik heen?</h2>
                 </header>
                 <ul>
-                    <li><a href="/art-galleries">+</a></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <% if (user) { %>
+                        <% if (user.name == id) { %>
+                            <li><a href="/art-galleries">+</a></li>
+                        <% }  %>
+                    <% } %>
+                    <% include partials/expoTile %>
                 </ul>
                 <footer>
                     Bewerken..

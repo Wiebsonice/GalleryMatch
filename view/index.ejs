@@ -19,7 +19,7 @@
     </header>
     <main class="main-home">
         <% if (user) { %>
-            <a class="main-cta" href="/account">Profiel pagina</a>
+            <a class="main-cta" href="/account/<%= user.name %>">Profiel pagina</a>
             <a class="sub-cta" href="/log-out">Log-uit</a>
         <% } else { %>
             <a class="sub-cta" href="/login">Log-in</a>
