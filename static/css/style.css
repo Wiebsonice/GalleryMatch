@@ -147,7 +147,16 @@ main {
     margin-top: 30px;
     display: block;
     position: relative;
-    height: 100%;
+    /* height: 100%; */
+}
+
+.main-home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
+    height: auto;
+    padding-top: 20px;
 }
 
 main.home {
@@ -356,3 +365,5 @@ section.art-galleries ul li header p.location {
     width: 100%;
     white-space: nowrap;
 }
+
+/* Forms */
