@@ -7,7 +7,7 @@ const mongo = require('mongodb');
 const session = require('express-session');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 const upload = multer({dest: 'static/upload/'})
 
 require('dotenv').config()
@@ -217,4 +217,4 @@ app.use(function(req, res, next){
 
 
 
-app.listen(process.env.PORT, () => console.log(`This app is listening on port ${port}!`))
+app.listen(port, () => console.log(`This app is listening on port ${port}!`))
