@@ -8,7 +8,7 @@ const session = require('express-session');
 const path = require('path');
 
 const app = express();
-let port = process.env.PORT || 3000;
+var port = process.env.PORT || 3000;
 const upload = multer({dest: 'static/upload/'})
 
 require('dotenv').config()
