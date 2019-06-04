@@ -69,11 +69,21 @@ function accountPage(req, res){
         _id: mongo.ObjectID(id)
     }, done)
 
+
+    // var accountResult = db.collection('account').findOne({_id: mongo.ObjectID(id)});
+    // var expoResults = db.collection('ArtExpositions').find().toArray();
+    // Promise.all([accountResult, expoResults]).then(function(values) {
+    //   console.log(value)
+    // });
+
+
+
     function done(err, data) {
         if (err) {
           next(err)
         } else {
-          res.render('account', {title: 'Je Account pagina', data: data})
+            console.log(data)
+          res.render('account', {title: 'Je Account pagina', data: data, id: id, user: req.session.user})
         }
     }
 }
@@ -84,7 +94,7 @@ function artGalleryPage(req, res){
         if (err) {
             next(err)
         } else {
-            res.render('artGalleries', {title: 'Art Galleries', data: data});
+            res.render('artGalleries', {title: 'Art Galleries', data: data, user: req.session.user});
         }
     }
 
@@ -189,22 +199,6 @@ function sendRegister(req, res, next) {
         }
     }
 }
-
-
-// harvart art api
-// var rest = require("restler");
-//
-// rest.get("https://api.harvardartmuseums.org/object", {
-//     query: {
-//         apikey: "0649ad30-7cd9-11e9-bbd3-cdc438639350",
-//         title: "car",
-//         fields: "objectnumber,title,dated,image",
-//     }
-// }).on("complete", function(data, response) {
-//     console.log(data);
-// });
-
-
 
 // 404 status route set.
 app.use(function(req, res, next){
