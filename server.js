@@ -13,7 +13,7 @@ const upload = multer({dest: 'static/upload/'})
 require('dotenv').config()
 
 var db = null;
-var url = 'mongodb://' + process.env.DB_HOST + ':' + process.env.DB_PORT;
+var url = process.env.DB_HOST;
 
 mongo.MongoClient.connect(url, function (err, client) {
   if (err) throw err
