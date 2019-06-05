@@ -7,6 +7,10 @@ const mongo = require('mongodb');
 const session = require('express-session');
 const path = require('path');
 
+// bcrypt info from https://www.npmjs.com/package/bcrypt
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 const app = express();
 var port = process.env.PORT || 3000;
 const upload = multer({dest: 'static/upload/'})
@@ -69,7 +73,7 @@ function accountPage(req, res){
         _id: mongo.ObjectID(id)
     }, done)
 
-
+    // test met data uit 2 collecties, niet gelukt
     // var accountResult = db.collection('account').findOne({_id: mongo.ObjectID(id)});
     // var expoResults = db.collection('ArtExpositions').find().toArray();
     // Promise.all([accountResult, expoResults]).then(function(values) {
@@ -82,7 +86,7 @@ function accountPage(req, res){
         if (err) {
           next(err)
         } else {
-            console.log(data)
+        
           res.render('account', {title: 'Je Account pagina', data: data, id: id, user: req.session.user})
         }
     }
@@ -169,7 +173,8 @@ function sendLogin(req, res, next){
         } if (!data){
             console.log("No user found with this email")
         } else {
-            if (userPassword === data.password) {
+            var result = bcrypt.compareSync(userPassword, data.password);
+            if (result) {
                 req.session.user = {name: data._id}
                 res.redirect('/')
             } else {
@@ -181,10 +186,12 @@ function sendLogin(req, res, next){
 
 function sendRegister(req, res, next) {
     var naam = slug(req.body.name).toLowerCase()
+    var pwd = req.body.password;
+    var hash = bcrypt.hashSync(pwd, saltRounds);
     db.collection('account').insertOne({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password,
+        password: hash,
         cover: req.file ? req.file.filename : null,
         expoWishlist:[]
     }, done)
