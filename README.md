@@ -38,7 +38,7 @@ SESSION_SECRET=<session secret>
 ```
 6. Be sure to include the `.env` file in your `gitignore`
 
-### if you want to use a local database follow these steps, otherwise skip to 9.
+### If you want to use a local database follow these steps, otherwise skip to 9.
 7. Specify the path to the local mongodb storage
 ```
 mongod --dbpath <path to data directory>
@@ -47,7 +47,7 @@ mongod --dbpath <path to data directory>
 ```
 mongod
 ```
-### online database (if you have a local db skip to step 14)
+### Online database (if you have a local db skip to step 14)
 9. mlab and mongodb offer free sandbox plans to basic users. Register an account.
 10. Set up a cluster in mongodb call this cluster `gallerymatch`
 11. Make a database, name this database `GalleryMatch`
