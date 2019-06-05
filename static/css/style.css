@@ -91,6 +91,23 @@ nav.detail div.back {
     margin-top: -5px;
 }
 
+.logout {
+    background: url("../assets/logout-icon.png");
+    background-position: center;
+    background-size: 90%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50.5px;
+    width: 50.5px;
+}
+
+.logout a {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
 .logo {
     width: 50%;
     padding: .5em 1.5em;

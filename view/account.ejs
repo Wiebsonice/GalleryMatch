@@ -7,6 +7,11 @@
         <div class="logo">
             <a href="../"><img src="../assets/logo.png" alt="site logo"></a>
         </div>
+        <% if (user) { %>
+        <div class="logout">
+            <a href="/log-out"></a>
+        </div>
+        <% } %>
     </nav>
     <header>
         <% if (data) { %>

@@ -9,9 +9,6 @@
             <img src="assets/logo.png" alt="site logo">
         </div>
     </nav>
-    <% if (user) { %>
-        <h1> <%= user.name %></h1>
-    <% } %>
     <header>
         <img src="assets/header.jpg" alt="" class="header-bg">
         <div class="gradient-mask"></div>
@@ -19,8 +16,8 @@
     </header>
     <main class="main-home">
         <% if (user) { %>
-            <a class="main-cta" href="/account/<%= user.name %>">Profiel pagina</a>
             <a class="sub-cta" href="/log-out">Log-uit</a>
+            <a class="main-cta" href="/account/<%= user.name %>">Profiel pagina</a>
         <% } else { %>
             <a class="sub-cta" href="/login">Log-in</a>
             <a class="main-cta" href="/register">Register</a>
