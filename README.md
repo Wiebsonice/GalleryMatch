@@ -26,10 +26,42 @@ git clone https://github.com/Wiebsonice/GalleryMatch.git
 ```
 npm install
 ```
-4. Run the application
+
+### .env
+4. Make a `.env` file and place in your root folder.
+5. your .env file should look similar to this:
+```
+DB_HOST=<db host>
+DB_NAME=GalleryMatch
+PORT=3000
+SESSION_SECRET=<session secret>
+```
+6. Be sure to include the `.env` file in your `gitignore`
+
+### if you want to use a local database follow these steps, otherwise skip to 9.
+7. Specify the path to the local mongodb storage
+```
+mongod --dbpath <path to data directory>
+```
+8. Start your database (in a new terminal tab)
+```
+mongod
+```
+### online database (if you have a local db skip to step 14)
+9. mlab and mongodb offer free sandbox plans to basic users. Register an account.
+10. Set up a cluster in mongodb call this cluster `gallerymatch`
+11. Make a database, name this database `GalleryMatch`
+12. add 2 collections to your database.
+    - `account`
+    - `ArtExpositions`
+13. Get the connection string and save this in your `.env` file as `DB_HOST`.
+
+### Starting the app
+14. Run the application
 ```
 npm run start
 ```
+15. Use your browser to navigate to `http://localhost:3000` (the port can be set in `.env` as `PORT`)
 
 ## License
 [MIT License](https://github.com/Wiebsonice/GalleryMatch/blob/master/license)
