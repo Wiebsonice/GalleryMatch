@@ -47,8 +47,10 @@ mongod --dbpath <path to data directory>
 ```
 mongod
 ```
-### Online database (if you have a local db skip to step 14)
+### Online database (If you have a local db skip to step 10)
 9. mlab and mongodb offer free sandbox plans to basic users. Register an account.
+
+### I got a database, whats next?
 10. Set up a cluster in mongodb call this cluster `gallerymatch`
 11. Make a database, name this database `GalleryMatch`
 12. add 2 collections to your database.
