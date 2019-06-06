@@ -20,7 +20,7 @@ require('dotenv').config()
 var db = null;
 var url = process.env.DB_HOST;
 
-mongo.MongoClient.connect(url, function (err, client) {
+mongo.MongoClient.connect(url, { useNewUrlParser: true }, function (err, client) {
   if (err) throw err
   db = client.db(process.env.DB_NAME)
 })
@@ -86,7 +86,7 @@ function accountPage(req, res){
         if (err) {
           next(err)
         } else {
-        
+
           res.render('account', {title: 'Je Account pagina', data: data, id: id, user: req.session.user})
         }
     }
@@ -219,4 +219,4 @@ app.use(function(req, res, next){
 
 
 
-app.listen(process.env.PORT, "0.0.0.0")
+app.listen(process.env.PORT, "0.0.0.0", console.log("App is started on port " + port))
