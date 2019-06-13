@@ -128,7 +128,7 @@ function galleryPage(req, res){
         if (err) {
           next(err)
         } else {
-          res.render('galleryDetail', {title: data.name, data: data,user: req.session.user})
+          res.render('galleryDetail', {title: data.name, data: data, user: req.session.user})
         }
     }
 }
