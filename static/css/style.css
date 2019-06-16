@@ -385,10 +385,12 @@ section.art-galleries ul li header p.location {
 h3 {
     color: white;
     text-transform: capitalize;
+    padding-top: 5px;
+    text-align: center;
 }
 
 .jsTitle {
-    display: none;
+
 }
 
 /* CSS filters */
