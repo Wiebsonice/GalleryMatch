@@ -3,8 +3,8 @@
         <ul>
             <% for (var index = 0; index < data.length; index++){%>
                 <li class=" art-expo-tile <%= data[index].artstyle.toLowerCase() %>">
-                    <div class="location-bg" style="background-image: url(assets/expo-covers/<%= data[index].cover %>)"></div>
-                    <a href="art-galleries/<%= data[index]._id %>">
+                    <div class="location-bg" style="background-image: url(/assets/expo-covers/<%= data[index].cover %>)"></div>
+                    <a href="/art-galleries/<%= data[index]._id %>">
                     <header>
                         <p class="title"><%= data[index].artist %></p>
                         <p class="Location"><%= data[index].location %></p>

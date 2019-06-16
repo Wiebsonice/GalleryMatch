@@ -1,0 +1,31 @@
+<html lang="nl" dir="ltr">
+    <head>
+        <% include partials/head %>
+    </head>
+    <body class="">
+        <nav class="detail">
+            <div class="back">
+                <a href="/account"><</a>
+            </div>
+            <h2>Kunst tentoonstellingen</h2>
+            <div class="filter-btn">
+                V
+            </div>
+        </nav>
+        <div class="filter show">
+            <form method="post">
+              <fieldset class="form-check">
+                <!-- <legend>Filter on art style</legend> -->
+                    <p class="artstyle">Actieve filter: <span><%= artstyle %></span></p>
+                <button class="no-js-filter">Verwijder filter</button>
+              </fieldset>
+            </form>
+        </div>
+            <h3><%= artstyle %> Expo's:</h3>
+        <main>
+            <% include partials/galleryList %>
+        </main>
+
+        <script src="/js/main.js"></script>
+    </body>
+</html>

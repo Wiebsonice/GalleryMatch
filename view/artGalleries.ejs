@@ -13,23 +13,24 @@
             </div>
         </nav>
         <div class="filter show">
-            <form>
+            <form method="post">
               <fieldset class="form-check">
-                <legend>Filter on art style</legend>
+                <legend>Filter op kunststijl</legend>
                 <% for (var index = 0; index < artstyles.length; index++){ %>
                 <p>
-                  <input class="filter-box-<%= index + 1 %>" type="radio" name="size" id="style_<%= index + 1 %>" value="<%= artstyles[index] %>">
+                  <input class="filter-box-<%= index + 1 %>" type="radio" name="artstyle" id="style_<%= index + 1 %>" value="<%= artstyles[index] %>" required>
                   <label for="style_<%= index + 1 %>"><%= artstyles[index] %></label>
                 </p>
                 <% } %>
                 <p>
-                  <input class="filter-box-7" type="radio" name="size" id="style_7" value="no-filter" checked>
-                  <label for="style_7">no filters</label>
+                  <input class="filter-box-7" type="radio" name="artstyle" id="style_7" value="no-filter">
+                  <label class="lable-box-7" for="style_7">Geen filters</label>
                 </p>
-                <button class="no-js-filter">filter</button>
+                <button class="no-js-filter">Apply Filter</button>
               </fieldset>
             </form>
         </div>
+            <h3 class="jsTitle">Alle expo's:</h3>
         <main>
             <% include partials/galleryList %>
         </main>

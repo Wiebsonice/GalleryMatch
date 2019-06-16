@@ -48,7 +48,10 @@ app.get('/login', loginPage);
 app.get('/log-out', logout);
 app.get('/art-galleries/:id', galleryPage);
 app.get('/account/:id', accountPage);
+app.get('/art-galleries/style/:id', artGalleryPageReset);
 
+app.post('/art-galleries', stylePage);
+app.post('/art-galleries/style/:id', stylePageReset);
 app.post('/register', upload.single('cover'), sendRegister);
 app.post('/login', sendLogin);
 app.post('/art-galleries/:id', addToWishlist);
@@ -109,6 +112,22 @@ function artGalleryPage(req, res){
     }
 
 }
+function artGalleryPageReset(req, res){
+    var id = req.params.id;
+
+    db.collection('ArtExpositions').find({ artstyle: id }).toArray(done)
+
+    function done(err, data) {
+        if (err) {
+            next(err)
+        } else {
+            var artstyles = [];
+
+            res.render('artGalleriesFiltered', {title: 'Art Galleries', data: data, artstyle: id, user: req.session.user});
+        }
+    }
+
+}
 function registerPage(req, res){
     res.render('formPage.ejs', {title: 'Registreren' });
 }
@@ -135,6 +154,32 @@ function galleryPage(req, res){
           next(err)
         } else {
           res.render('galleryDetail', {title: data.name, data: data, user: req.session.user})
+        }
+    }
+}
+
+function stylePage(req, res){
+    var style = req.body.artstyle.toLowerCase();
+
+    db.collection('ArtExpositions').find().toArray(done)
+
+    function done(err, data) {
+        if (err) {
+            next(err)
+        } else {
+            res.redirect('art-galleries/style/' + style)
+        }
+    }
+}
+
+function stylePageReset(req, res){
+    db.collection('ArtExpositions').find().toArray(done)
+
+    function done(err, data) {
+        if (err) {
+            next(err)
+        } else {
+            res.redirect('/art-galleries')
         }
     }
 }

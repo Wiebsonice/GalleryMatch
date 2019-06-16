@@ -39,7 +39,6 @@
 body {
     font-family: "OpenSans", sans-serif;
     background: #31333d;
-    min-height: 100vh;
     width: 100vw;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -304,10 +303,10 @@ section.art-galleries {
 }
 
 .filter {
-    margin-top: 60px;
-    height: 0;
+    margin-top: 51px;
+    max-height: 0;
     overflow: hidden;
-    transition: ease .5s height;
+    transition: ease .5s max-height;
 }
 
 section.art-galleries ul {
@@ -329,7 +328,6 @@ section.art-galleries ul li{
 }
 
 section.art-galleries ul li .location-bg{
-    background: red;
     position: relative;
     width: 100%;
     height: 100%;
@@ -378,7 +376,55 @@ section.art-galleries ul li header p.location {
 
 .show {
     transition: ease .5s all;
-    height: 180px;
+    height: auto;
+    max-height: 250px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+h3 {
+    color: white;
+    text-transform: capitalize;
+}
+
+.jsTitle {
+    display: none;
+}
+
+/* CSS filters */
+.filter {
+    background: white;
+    box-sizing: border-box;
+}
+.filter fieldset{
+    border: none;
+    padding: 0 10px;
+}
+.filter legend {
+    font-weight: bold;
+    font-size: 20px;
+}
+.filter label {
+    text-transform: capitalize;
+}
+.filter-box-7, .lable-box-7 {
+    display: none;
+}
+p.artstyle span{
+    text-transform: capitalize;
+}
+
+.no-js-filter {
+    background: #31a45c;
+    color: #31333d;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    margin: 8px 0;
+}
+
+.filter-btn {
+    display: none;
 }
 
 /* Forms */

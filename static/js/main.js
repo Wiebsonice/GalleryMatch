@@ -5,6 +5,9 @@ var filterOuter = document.querySelector('.filter');
 var checkboxes = document.querySelector('.form-check');
 
 var noJs = document.querySelector('.no-js-filter');
+var jsTitle = document.querySelector('.jsTitle');
+var radioReset = document.querySelector('.filter-box-7');
+var radioResetLbl = document.querySelector('.lable-box-7');
 
 var checkOne = document.querySelector('.filter-box-1');
 var checkTwo = document.querySelector('.filter-box-2');
@@ -54,10 +57,12 @@ function filterNow(style){
     var tiles = document.getElementsByClassName('art-expo-tile')
 
     if (style == "reset") {
+        jsTitle.innerHTML = "Alle expo's";
         for (var i = 0; i < tiles.length; i++){
             tiles[i].classList.remove("hide");
         }
     } else {
+        jsTitle.innerHTML = style + " expo's";
         for (var i = 0; i < tiles.length; i++){
             if (tiles[i].classList.contains(style.toLowerCase())) {
                 tiles[i].classList.remove("hide");
@@ -69,6 +74,10 @@ function filterNow(style){
 }
 
 noJs.style.display = "none";
+radioReset.style.display = "inline";
+radioResetLbl.style.display = "inline";
+filterBtn.style.display = "block";
+jsTitle.style.display = "block";
 filterOuter.classList.remove("show");
 filterBtn.addEventListener("click", function(){
     filterOuter.classList.toggle("show");
