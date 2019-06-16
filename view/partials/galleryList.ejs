@@ -2,7 +2,7 @@
     <article class="">
         <ul>
             <% for (var index = 0; index < data.length; index++){%>
-                <li>
+                <li class=" art-expo-tile <%= data[index].artstyle.toLowerCase() %>">
                     <div class="location-bg" style="background-image: url(assets/expo-covers/<%= data[index].cover %>)"></div>
                     <a href="art-galleries/<%= data[index]._id %>">
                     <header>

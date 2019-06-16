@@ -98,7 +98,13 @@ function artGalleryPage(req, res){
         if (err) {
             next(err)
         } else {
-            res.render('artGalleries', {title: 'Art Galleries', data: data, user: req.session.user});
+            var artstyles = [];
+            for (i = 0; i < 12; i++) {
+                if (!artstyles.includes(data[i].artstyle)) {
+                    artstyles.push(data[i].artstyle)
+                }
+            }
+            res.render('artGalleries', {title: 'Art Galleries', artstyles: artstyles, data: data, user: req.session.user});
         }
     }
 

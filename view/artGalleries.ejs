@@ -8,17 +8,32 @@
                 <a href="/account"><</a>
             </div>
             <h2>Kunst tentoonstellingen</h2>
+            <div class="filter-btn">
+                V
+            </div>
         </nav>
-        <!-- <header class="search">
-            <form class="" action="" method="">
-                <input type="text" name="" value="">
+        <div class="filter show">
+            <form>
+              <fieldset class="form-check">
+                <legend>Filter on art style</legend>
+                <% for (var index = 0; index < artstyles.length; index++){ %>
+                <p>
+                  <input class="filter-box-<%= index + 1 %>" type="radio" name="size" id="style_<%= index + 1 %>" value="<%= artstyles[index] %>">
+                  <label for="style_<%= index + 1 %>"><%= artstyles[index] %></label>
+                </p>
+                <% } %>
+                <p>
+                  <input class="filter-box-7" type="radio" name="size" id="style_7" value="no-filter" checked>
+                  <label for="style_7">no filters</label>
+                </p>
+                <button class="no-js-filter">filter</button>
+              </fieldset>
             </form>
-            <a href="">search</a>
-        </header> -->
+        </div>
         <main>
             <% include partials/galleryList %>
         </main>
 
-        <script src="../js/main.js"></script>
+        <script src="/js/main.js"></script>
     </body>
 </html>
