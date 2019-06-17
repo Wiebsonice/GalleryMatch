@@ -103,6 +103,14 @@ nav.detail div.filter-btn {
     top: 5px;
 }
 
+nav.detail .filter-btn, nav.detail span{
+    display: none;
+}
+
+.art-expo-tile figure{
+    display: none;
+}
+
 .logout {
     background: url("../assets/logout-icon.png");
     background-position: center;
