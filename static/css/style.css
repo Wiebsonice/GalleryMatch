@@ -42,6 +42,9 @@ body {
     width: 100vw;
     overflow-x: hidden;
     overflow-y: scroll;
+    max-width: 450px;
+    margin: 0 auto;
+    position: relative;
 }
 
 body.bg-light {
@@ -81,6 +84,7 @@ nav.detail {
     color: #31333d;
     height: 50px;
     top: 0;
+    max-width: 450px;
 }
 
 nav.detail h2 {
