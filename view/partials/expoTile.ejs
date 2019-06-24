@@ -1,16 +1,11 @@
-<html lang="nl">
+<html lang=“nl”>
 <% for (var index = 0; index < data.expoWishlist.length; index++){ %>
-    <!-- <% function searchExpo(expoID) {
-        return expoID._id === data.expoWishlist[index];
-    }
-    console.log(expo.find(searchExpo))
-    %> -->
-    <li>
+   <li>
 
-        <header style="left:0;">
-            <span style="font-size:10px; word-break:break-all;"><%= data.expoWishlist[index] %></span>
-            <p></p>
-        </header>
-        </a>
-    </li>
+       <header style=“left:0;“>
+           <span style=“font-size:10px; word-break:break-all;“><%= data.expoWishlist[index].cover %></span>
+           <p><%= data.expoWishlist[index].artist %></p>
+       </header>
+       </a>
+   </li>
 <% } %>

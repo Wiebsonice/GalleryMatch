@@ -94,11 +94,14 @@ function accountPage(req, res){
         if (err) {
           next(err)
         } else {
-            expoResults = data;
-            console.log(accountResult)
-            console.log("-------")
-            console.log(expoResults)
-          res.render('account', {title: 'Je Account pagina', data: accountResult, expo: expoResults , id: id, user: req.session.user})
+          expoResults = data;
+          for (let i = 0; i < accountResult.expoWishlist.length; i++) {
+               accountResult.expoWishlist[i] = expoResults.find(findExpo);
+               function findExpo(expo) {
+                   return expo._id == accountResult.expoWishlist[i];
+               }
+           }
+          res.render('account', {title: 'Je Account pagina', data: accountResult , id: id, user: req.session.user})
         }
     }
 }
