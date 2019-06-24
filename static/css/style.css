@@ -132,6 +132,24 @@ nav.detail .filter-btn, nav.detail span{
     height: 100%;
 }
 
+.settings {
+    background: url("../assets/settings-icon.png");
+    background-position: center;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50.5px;
+    width: 50.5px;
+}
+
+.settings a {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
 .logo {
     width: 50%;
     padding: .5em 1.5em;

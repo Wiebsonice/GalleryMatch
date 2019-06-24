@@ -4,6 +4,11 @@
 </head>
 <body>
     <nav class="default">
+        <% if (user) { %>
+        <div class="settings">
+            <a href="/settings"></a>
+        </div>
+        <% } %>
         <div class="logo">
             <a href="../"><img src="../assets/logo.png" alt="site logo"></a>
         </div>
@@ -32,10 +37,15 @@
         <section class="personal-info">
             <article class="">
                 <ul>
-                    <li>Job title</li>
-                    <li>Location</li>
-                    <li>Favorite artist</li>
-                    <li>Recently visited art gallery</li>
+                    <% if (data) { %>
+                        <li><%= data.job %></li>
+                        <li><%= data.location %></li>
+                        <li><%= data.favArtist %></li>
+                    <% } else { %>
+                        <li>Job title</li>
+                        <li>Location</li>
+                        <li>Favorite artist</li>
+                    <% }%>
                 </ul>
             </article>
         </section>
@@ -50,7 +60,7 @@
                             <li><a href="/art-galleries">+</a></li>
                         <% }  %>
                     <% } %>
-                    <% if (data) { %>
+                    <% if (data.expoWishlist) { %>
                     <% include partials/expoTile %>
                     <% } %>
                 </ul>

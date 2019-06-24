@@ -1,0 +1,30 @@
+<html lang="nl" dir="ltr">
+    <head>
+        <% include partials/head %>
+    </head>
+    <body class="">
+        <nav class="detail">
+            <div class="back">
+                <a href="/account"><</a>
+            </div>
+            <h2>Delete account</h2>
+
+        </nav>
+
+        <main style="color:white !important; margin-top:60px;">
+            <form class="main-form" method="post">
+                <fieldset>
+                    <legend>Delete account</legend>
+                    <p>
+                        <p>Weet je zeker dat je je account wilt verwijderen?</p>
+                        <input type="checkbox" id="confirm" name="confirm" placeholder="" required>
+                        <label for="confirm">Ja ik wil mijn account verwijderen</label>
+                    </p>
+                    <p>
+                        <button type="submit" name="button">Opslaan</button>
+                    </p>
+                </fieldset>
+            </form>
+        </main>
+    </body>
+</html>

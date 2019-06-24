@@ -1,3 +1,5 @@
+// document.body.classList.add('js-enabled');
+
 // ages.filter(checkAdult);
 // document.querySelector('.messageCheckbox').checked
 var filterBtn = document.querySelector('.filter-btn');

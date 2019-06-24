@@ -1,0 +1,32 @@
+<form class="main-form" method="post">
+    <fieldset>
+        <legend>Account info</legend>
+        <p>
+            <label for="name">Naam</label>
+            <input type="text" id="name" name="name" placeholder="<%= data.name %>" required>
+        </p>
+        <p>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="<%= data.email %>" required>
+        </p>
+    </fieldset>
+    <fieldset>
+        <legend>Persoonlijke info</legend>
+        <p>
+            <label for="werk">Werk</label>
+            <input type="text" id="werk" name="werk" placeholder="<%= data.job %>" required>
+        </p>
+        <p>
+            <label for="woonplaats">Woonplaats</label>
+            <input type="text" id="woonplaats" name="woonplaats" placeholder="<%= data.location %>" required>
+        </p>
+        <p>
+            <label for="favoriteartist">Favorite Artist</label>
+            <input type="text" id="favoriteartist" name="favoriteartist" placeholder="<%= data.favArtist %>" required>
+        </p>
+    </fieldset>
+        <p>
+            <button type="submit" name="button">Opslaan</button>
+        </p>
+
+</form>

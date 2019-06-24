@@ -28,6 +28,7 @@ mongo.MongoClient.connect(url, { useNewUrlParser: true }, function (err, client)
 
 // allow cross orgin resource serving from: https://flaviocopes.com/express-cors/
 app.use(cors({origin: '*'}));
+app.use(bodyParser.json())
 
 app.use(session({
     resave: false,
@@ -46,11 +47,15 @@ app.get('/art-galleries', artGalleryPage);
 app.get('/register', registerPage);
 app.get('/login', loginPage);
 app.get('/log-out', logout);
+app.get('/settings', settings);
+app.get('/remove', remove)
 app.get('/art-galleries/:id', galleryPage);
 app.get('/account/:id', accountPage);
 app.get('/art-galleries/style/:id', artGalleryPageReset);
 
 app.post('/art-galleries', stylePage);
+app.post('/settings', settingsSave);
+app.post('/remove', removeAcc);
 app.post('/art-galleries/style/:id', stylePageReset);
 app.post('/register', upload.single('cover'), sendRegister);
 app.post('/login', sendLogin);
@@ -72,25 +77,28 @@ function homePage(req, res){
 }
 function accountPage(req, res){
     var id = req.params.id
-    db.collection('account').findOne({
-        _id: mongo.ObjectID(id)
-    }, done)
+    // db.collection('account').findOne({
+    //     _id: mongo.ObjectID(id)
+    // }, done)
 
-    // test met data uit 2 collecties, niet gelukt
-    // var accountResult = db.collection('account').findOne({_id: mongo.ObjectID(id)});
-    // var expoResults = db.collection('ArtExpositions').find().toArray();
-    // Promise.all([accountResult, expoResults]).then(function(values) {
-    //   console.log(value)
-    // });
-
+    var accountResult;
+    var expoResults;
+    db.collection('account').findOne({_id: mongo.ObjectID(id)}, part2);
+    function part2(err,data) {
+        accountResult = data;
+        db.collection('ArtExpositions').find().toArray(done);
+    }
 
 
     function done(err, data) {
         if (err) {
           next(err)
         } else {
-
-          res.render('account', {title: 'Je Account pagina', data: data, id: id, user: req.session.user})
+            expoResults = data;
+            console.log(accountResult)
+            console.log("-------")
+            console.log(expoResults)
+          res.render('account', {title: 'Je Account pagina', data: accountResult, expo: expoResults , id: id, user: req.session.user})
         }
     }
 }
@@ -244,7 +252,10 @@ function sendRegister(req, res, next) {
         email: req.body.email,
         password: hash,
         cover: req.file ? req.file.filename : null,
-        expoWishlist:[]
+        expoWishlist:[],
+        job: "",
+        location: "",
+        favArtist: ""
     }, done)
 
     function done(err, data) {
@@ -257,6 +268,84 @@ function sendRegister(req, res, next) {
         }
     }
 }
+
+function settings(req, res){
+    if (!req.session.user){
+        return res.redirect('/')
+    } else {
+        var user = req.session.user
+        var ObjectID = require('mongodb').ObjectID;
+        db.collection('account').findOne({
+            _id: ObjectID(user.name)
+        }, done)
+    }
+    function done(err, data) {
+        if (err) {
+            next(err)
+        } else {
+            res.render('settings', {title: settings, data: data, user: req.session.user})
+        }
+    }
+}
+
+function settingsSave(req, res, next){
+    var sessionID = req.session.user;
+    var accountID = sessionID.name;
+
+    var ObjectID = require('mongodb').ObjectID;
+    db.collection('account').updateOne(
+        { _id: ObjectID(accountID) },
+        {
+          $set: {
+            name: req.body.name,
+            email: req.body.email,
+            job: req.body.werk,
+            location: req.body.woonplaats,
+            favArtist: req.body.favoriteartist
+          }
+        }
+    , done)
+
+
+    function done(err, data) {
+        if (err) {
+            next(err)
+        } else {
+            res.redirect('/account/' + accountID)
+        }
+    }
+}
+
+function remove(req, res){
+    db.collection('account').find().toArray(done)
+
+    function done(err, data) {
+        if (err) {
+            next(err)
+        } else {
+            res.render('remove', {title: "Remove account", data: data, user: req.session.user})
+        }
+    }
+}
+
+function removeAcc(req, res){
+    var sessionID = req.session.user;
+    var accountID = sessionID.id;
+    var ObjectID = require('mongodb').ObjectID;
+
+    db.collection('data').remove(
+       { _id: ObjectID(accountID) }
+    , done);
+    function done(err, data) {
+        if (err) {
+            next(err)
+        } else {
+            req.session.destroy();
+            res.redirect('/')
+        }
+    }
+}
+
 
 // 404 status route set.
 app.use(function(req, res, next){
