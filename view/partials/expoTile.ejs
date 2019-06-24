@@ -1,11 +1,12 @@
 <html lang=“nl”>
 <% for (var index = 0; index < data.expoWishlist.length; index++){ %>
-   <li>
-
-       <header style=“left:0;“>
-           <span style=“font-size:10px; word-break:break-all;“><%= data.expoWishlist[index].cover %></span>
-           <p><%= data.expoWishlist[index].artist %></p>
+   <li class="expo-tile-single">
+       <div class="expotile-bg" style="background-image: url(/assets/expo-covers/<%= data.expoWishlist[index].cover %>)"></div>
+       <header>
+           <span style=“font-size:10px; word-break:break-all;“></span>
+           <h2><%= data.expoWishlist[index].artist %></h2>
+           <p><%= data.expoWishlist[index].location %></p>
        </header>
-       </a>
+       <a href="/art-galleries/<%= data.expoWishlist[index]._id %>"></a>
    </li>
 <% } %>
